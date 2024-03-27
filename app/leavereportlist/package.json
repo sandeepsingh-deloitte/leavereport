@@ -2,6 +2,9 @@
     "name": "leavereportlist",
     "version": "0.0.1",
     "description": "Leave Report",
+    "dependencies": {
+        "@sap/approuter": "^16.0.0"
+    },
     "keywords": [
         "ui5",
         "openui5",
@@ -9,7 +12,8 @@
     ],
     "main": "webapp/index.html",
     "scripts": {
-        "deploy-config": "npx -p @sap/ux-ui5-tooling fiori add deploy-config cf"
+        "deploy-config": "npx -p @sap/ux-ui5-tooling fiori add deploy-config cf",
+        "start": "node node_modules/@sap/approuter/approuter.js"
     },
-    "devDependencies": { }
+    "devDependencies": {}
 }
