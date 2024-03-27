@@ -6,6 +6,9 @@
     "license": "UNLICENSED",
     "private": true,
     "dependencies": {
+        "@sap-cloud-sdk/connectivity": "^3.13.0",
+        "@sap-cloud-sdk/http-client": "^3.13.0",
+        "@sap-cloud-sdk/resilience": "^3.13.0",
         "@sap/cds": "^7",
         "@sap/cds-hana": "^2",
         "@sap/xssec": "^3",
@@ -19,6 +22,7 @@
     },
     "scripts": {
         "start": "cds-serve",
+        "start-hybrid": "cds-serve --profile hybrid",
         "watch-leavereportlist": "cds watch --open leavereportlist/webapp/index.html?sap-ui-xx-viewCache=false",
         "undeploy": "cf undeploy undefined --delete-services --delete-service-keys --delete-service-brokers",
         "build": "rimraf resources mta_archives && mbt build --mtar archive",

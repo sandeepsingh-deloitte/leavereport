@@ -17,7 +17,7 @@
     },
     "dataSources": {
       "mainService": {
-        "uri": "/odata/v4/leave-request/",
+        "uri": "/odata/v4/LeaveRequestReport/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -117,7 +117,7 @@
           "name": "sap.fe.templates.ListReport",
           "options": {
             "settings": {
-              "contextPath": "/LeaveRequest",
+              "contextPath": "/LeaveReport",
               "variantManagement": "Page",
               "navigation": {
                 "LeaveRequest": {
@@ -136,7 +136,7 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/LeaveRequest"
+              "contextPath": "/LeaveReport"
             }
           }
         }
@@ -146,5 +146,10 @@
   "sap.fiori": {
     "registrationIds": [],
     "archeType": "transactional"
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "leavelistreport"
   }
+}
 }

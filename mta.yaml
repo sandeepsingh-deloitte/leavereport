@@ -11,6 +11,7 @@ modules:
   - name: leavereport-db
   - name: leavereport-logging
   - name: leavereport-connectivity
+  - name: leavereport-destination-service
   provides:
   - name: srv-api
     properties:
@@ -42,6 +43,43 @@ modules:
     disk-quota: 256M
     keep-existing-routes: true
     memory: 256M
+- name: leavereport-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: leavereport-destination-service
+    parameters:
+      content-target: true
+  - name: leavereport_html_repo_host
+    parameters:
+      service-key:
+        name: key
+  - name: leavereport-auth
+    parameters:
+      service-key:
+        name: key
+  - name: srv-api
+  parameters:
+    content:
+      instance:
+        destinations:        
+        - Authentication: OAuth2UserTokenExchange
+          Name: leavereport-auth
+          ServiceInstanceName: leavereport-auth
+          ServiceKeyName: key
+          sap.cloud.service: leavelistreport
+        - Authentication: OAuth2UserTokenExchange
+          Name: srv-api
+          TokenServiceInstanceName: leavereport-auth
+          TokenServiceKeyName: key
+          URL: ~{srv-api/srv-url}
+          sap.cloud.service: leavelistreport
+        - Name: leavereport_html_repo_host
+          ServiceInstanceName: leavereport-repo-host
+          ServiceKeyName: key
+          sap.cloud.service: leavelistreport
+        existing_destinations_policy: update  
+  build-parameters:
+    no-source: true
 resources:
 - name: leavereport-auth
   type: org.cloudfoundry.managed-service
@@ -61,17 +99,43 @@ resources:
   type: org.cloudfoundry.managed-service
   parameters:
     service: application-logs
-    service-plan: standard
+    service-plan: lite
 - name: leavereport_html_repo_host
   type: org.cloudfoundry.managed-service
   parameters:
     service: html5-apps-repo
+    service-name: leavereport-repo-host
     service-plan: app-host
 - name: leavereport-connectivity
   type: org.cloudfoundry.managed-service
   parameters:
     service: connectivity
     service-plan: lite
+- name: leavereport-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: false
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          - Authentication: OAuth2UserTokenExchange
+            Name: srv-api
+            TokenServiceInstanceName: leavereport-auth
+            TokenServiceKeyName: key
+            URL: ~{srv-api/srv-url}            
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: leavereport-destination-service
+    service-plan: lite
+  requires:
+  - name: srv-api
 parameters:
   enable-parallel-deployments: true
 build-parameters:
