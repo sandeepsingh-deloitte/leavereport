@@ -30,7 +30,10 @@
     },
     "cds": {
         "requires": {
-            "auth": "xsuaa",
+            "auth": {
+                "kind": "jwt",
+                "restrict_all_services": false
+            },
             "db": "hana",
             "LeaveRequest": {
                 "kind": "odata",
