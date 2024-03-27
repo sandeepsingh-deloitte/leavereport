@@ -1,0 +1,170 @@
+{
+ "meta": {
+  "creator": "cds-dk 7.7.1"
+ },
+ "$version": "2.0",
+ "definitions": {
+  "LeaveRequest.LeaveRequest": {
+   "kind": "entity",
+   "@cds.external": true,
+   "@cds.persistence.skip": true,
+   "elements": {
+    "ID": {
+     "key": true,
+     "type": "cds.UUID",
+     "notNull": true,
+     "@Core.ComputedDefaultValue": true
+    },
+    "RequestNumber": {
+     "type": "cds.String",
+     "length": 10,
+     "@Common.Label": "Request Number"
+    },
+    "FromDate": {
+     "type": "cds.Timestamp",
+     "@odata.Precision": 7,
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@Common.Label": "From Date"
+    },
+    "ToDate": {
+     "type": "cds.Timestamp",
+     "@odata.Precision": 7,
+     "@odata.Type": "Edm.DateTimeOffset",
+     "@Common.Label": "To Date"
+    },
+    "Days": {
+     "type": "cds.Integer",
+     "@Common.Label": "Number of Days"
+    },
+    "LeaveType": {
+     "type": "cds.String",
+     "length": 2,
+     "@Common.Label": "Leave Type",
+     "@Validation.AllowedValues": [
+      {
+       "$Type": "Validation.AllowedValue",
+       "@Core.SymbolicName": "Annual",
+       "Value": "01"
+      },
+      {
+       "$Type": "Validation.AllowedValue",
+       "@Core.SymbolicName": "Sick",
+       "Value": "02"
+      },
+      {
+       "$Type": "Validation.AllowedValue",
+       "@Core.SymbolicName": "Maternity",
+       "Value": "03"
+      },
+      {
+       "$Type": "Validation.AllowedValue",
+       "@Core.SymbolicName": "Paternity",
+       "Value": "04"
+      }
+     ]
+    },
+    "Comments": {
+     "type": "cds.String",
+     "length": 400,
+     "@Common.Label": "Comments"
+    }
+   },
+   "@UI.CreateHidden": false,
+   "@UI.SelectionFields": [
+    "RequestNumber",
+    "LeaveType"
+   ],
+   "@UI.LineItem": [
+    {
+     "$Type": "UI.DataField",
+     "Value": {
+      "=": "RequestNumber"
+     }
+    },
+    {
+     "$Type": "UI.DataField",
+     "Value": {
+      "=": "FromDate"
+     }
+    },
+    {
+     "$Type": "UI.DataField",
+     "Value": {
+      "=": "ToDate"
+     }
+    },
+    {
+     "$Type": "UI.DataField",
+     "Value": {
+      "=": "Days"
+     }
+    },
+    {
+     "$Type": "UI.DataField",
+     "Value": {
+      "=": "LeaveType"
+     }
+    }
+   ],
+   "@UI.FieldGroup#GeneratedGroup1": {
+    "$Type": "UI.FieldGroupType",
+    "Data": [
+     {
+      "$Type": "UI.DataField",
+      "Value": {
+       "=": "RequestNumber"
+      }
+     },
+     {
+      "$Type": "UI.DataField",
+      "Value": {
+       "=": "FromDate"
+      }
+     },
+     {
+      "$Type": "UI.DataField",
+      "Value": {
+       "=": "ToDate"
+      }
+     },
+     {
+      "$Type": "UI.DataField",
+      "Value": {
+       "=": "Days"
+      }
+     },
+     {
+      "$Type": "UI.DataField",
+      "Label": "LeaveType",
+      "Value": {
+       "=": "LeaveType"
+      }
+     },
+     {
+      "$Type": "UI.DataField",
+      "Label": "Comments",
+      "Value": {
+       "=": "Comments"
+      }
+     }
+    ]
+   },
+   "@UI.Facets": [
+    {
+     "$Type": "UI.ReferenceFacet",
+     "ID": "GeneratedFacet1",
+     "Label": "General Information",
+     "Target": {
+      "=": "@UI.FieldGroup#GeneratedGroup1"
+     }
+    }
+   ],
+   "@Capabilities.InsertRestrictions.Insertable": true,
+   "@Capabilities.UpdateRestrictions.Updatable": true
+  },
+  "LeaveRequest": {
+   "kind": "service",
+   "@cds.external": true
+  }
+ }
+}

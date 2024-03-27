@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+    <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+    <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+    <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="LeaveRequest" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityContainer Name="EntityContainer">
+        <EntitySet Name="LeaveRequest" EntityType="LeaveRequest.LeaveRequest"/>
+      </EntityContainer>
+      <EntityType Name="LeaveRequest">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="RequestNumber" Type="Edm.String" MaxLength="10"/>
+        <Property Name="FromDate" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="ToDate" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="Days" Type="Edm.Int16"/>
+        <Property Name="LeaveType" Type="Edm.String" MaxLength="2"/>
+        <Property Name="Comments" Type="Edm.String" MaxLength="400"/>
+      </EntityType>
+      <Annotations Target="LeaveRequest.LeaveRequest">
+        <Annotation Term="UI.CreateHidden" Bool="false"/>
+        <Annotation Term="UI.SelectionFields">
+          <Collection>
+            <PropertyPath>RequestNumber</PropertyPath>
+            <PropertyPath>LeaveType</PropertyPath>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.LineItem">
+          <Collection>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="RequestNumber"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="FromDate"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="ToDate"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="Days"/>
+            </Record>
+            <Record Type="UI.DataField">
+              <PropertyValue Property="Value" Path="LeaveType"/>
+            </Record>
+          </Collection>
+        </Annotation>
+        <Annotation Term="UI.FieldGroup" Qualifier="GeneratedGroup1">
+          <Record Type="UI.FieldGroupType">
+            <PropertyValue Property="Data">
+              <Collection>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="RequestNumber"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="FromDate"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="ToDate"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Value" Path="Days"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="LeaveType"/>
+                  <PropertyValue Property="Value" Path="LeaveType"/>
+                </Record>
+                <Record Type="UI.DataField">
+                  <PropertyValue Property="Label" String="Comments"/>
+                  <PropertyValue Property="Value" Path="Comments"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="UI.Facets">
+          <Collection>
+            <Record Type="UI.ReferenceFacet">
+              <PropertyValue Property="ID" String="GeneratedFacet1"/>
+              <PropertyValue Property="Label" String="General Information"/>
+              <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneratedGroup1"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="LeaveRequest.EntityContainer/LeaveRequest">
+        <Annotation Term="UI.CreateHidden" Bool="false"/>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="true"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="LeaveRequest.LeaveRequest/ID">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="LeaveRequest.LeaveRequest/RequestNumber">
+        <Annotation Term="Common.Label" String="Request Number"/>
+      </Annotations>
+      <Annotations Target="LeaveRequest.LeaveRequest/FromDate">
+        <Annotation Term="Common.Label" String="From Date"/>
+      </Annotations>
+      <Annotations Target="LeaveRequest.LeaveRequest/ToDate">
+        <Annotation Term="Common.Label" String="To Date"/>
+      </Annotations>
+      <Annotations Target="LeaveRequest.LeaveRequest/Days">
+        <Annotation Term="Common.Label" String="Number of Days"/>
+      </Annotations>
+      <Annotations Target="LeaveRequest.LeaveRequest/LeaveType">
+        <Annotation Term="Common.Label" String="Leave Type"/>
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Annual"/>
+              <PropertyValue Property="Value" String="01"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Sick"/>
+              <PropertyValue Property="Value" String="02"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Maternity"/>
+              <PropertyValue Property="Value" String="03"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Paternity"/>
+              <PropertyValue Property="Value" String="04"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="LeaveRequest.LeaveRequest/Comments">
+        <Annotation Term="Common.Label" String="Comments"/>
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
