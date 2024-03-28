@@ -1,13 +1,8 @@
 {
   "xsappname": "leavereport",
   "tenant-mode": "dedicated",
-  "description": "Security profile of called application",
-  "scopes": [
-    {
-      "name": "uaa.user",
-      "description": "UAA"
-    }
-  ],
+  "description": "Security profile of called application", 
+  "authorities":["$ACCEPT_GRANTED_AUTHORITIES"], 
   "role-templates": [
     {
       "name": "Token_Exchange",

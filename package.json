@@ -12,7 +12,10 @@
         "@sap/cds": "^7",
         "@sap/cds-hana": "^2",
         "@sap/xssec": "^3",
-        "express": "^4"
+        "express": "^4",
+        "hdb": "^0.19.0",
+        "npm": "^9.6.7",
+        "passport": "^0.6.0"
     },
     "devDependencies": {
         "@cap-js/sqlite": "^1",
@@ -39,11 +42,17 @@
                 "kind": "odata",
                 "model": "srv/external/LeaveRequest",
                 "csrf": true,
-                "csrfInBatch": true,
+                "csrfInBatch": true,               
                 "credentials": {
-                    "destination": "leavereq-api",
-                    "path": "/odata/v4/LeaveRequest"
+                    "url": "https://96174b4dtrial-dev-leaveform-srv.cfapps.us10-001.hana.ondemand.com",
+                    "path": "/odata/v4/LeaveRequest",
+                    "forwardAuthToken": true
                 }
+            }
+        },
+        "auth": {
+            "passport": {
+                "strategy": "JWT"
             }
         }
     },
