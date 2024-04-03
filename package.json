@@ -29,7 +29,7 @@
         "watch-leavereportlist": "cds watch --open leavereportlist/webapp/index.html?sap-ui-xx-viewCache=false",
         "undeploy": "cf undeploy undefined --delete-services --delete-service-keys --delete-service-brokers",
         "build": "rimraf resources mta_archives && mbt build --mtar archive",
-        "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+        "deploy": "cf deploy mta_archives/leavereport_1.0.0.mtar --retries 1"
     },
     "cds": {
         "requires": {
@@ -44,9 +44,9 @@
                 "csrf": true,
                 "csrfInBatch": true,               
                 "credentials": {
-                    "url": "https://96174b4dtrial-dev-leaveform-srv.cfapps.us10-001.hana.ondemand.com",
-                    "path": "/odata/v4/LeaveRequest",
-                    "forwardAuthToken": true
+                    "destination": "leaverequest-api",
+                    "path": "/odata/v4/LeaveRequest"
+                    
                 }
             }
         },

@@ -1,22 +1,17 @@
 {
   "xsappname": "leavereport",
   "tenant-mode": "dedicated",
-  "description": "Security profile of called application", 
-  "authorities":["$ACCEPT_GRANTED_AUTHORITIES"], 
-  "role-templates": [
+  "description": "Security profile of called application",   
+  "authorities":["$XSAPPNAME(application,leaveform).leaveformscope"],
+  "scopes": [
     {
-      "name": "Token_Exchange",
-      "description": "UAA",
-      "scope-references": [
-        "uaa.user"
+      "name": "$XSAPPNAME.leavereportscope",      
+      "grant-as-authority-to-apps": [
+        "$XSAPPNAME(application, leaveform)"
       ]
     }
-  ],
-  "oauth2-configuration": {
-    "credential-types": [
-      "binding-secret",
-      "x509"
-    ],
+  ], 
+  "oauth2-configuration": {      
     "redirect-uris": [
       "https://*.applicationstudio.cloud.sap/login/callback"
     ]
